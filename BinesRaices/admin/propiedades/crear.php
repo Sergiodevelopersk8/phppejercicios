@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   /* Asignar files hacia una variable  */
   $imagen = $_FILES['image'];
-
+// var_dump($_FILES);
 
     if(!$titulo){
       $errores[] = "Debes añadir un titulo";
@@ -70,7 +70,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
       }
 
 /*Validar peso de la imagen */
-$medida = 1000 * 100;
+$medida = 1000 * 1000;
 if($imagen['size'] > $medida){
   $errores[] = "La imagen es muy pesada";
 }
@@ -79,8 +79,31 @@ if($imagen['size'] > $medida){
 
 if(empty($errores)){
 
-$query = "INSERT INTO propiedades (titulo,precio,descripcion,habitaciones,wc,estacionamient,creado, idVendedores) 
-values  ('$titulo','$precio','$descripcion','$habitaciones','$wc','$estacionamiento', '$creado','$vendedorId')";
+
+/*Subir archivos
+
+crear carpeta
+*/
+
+
+$carpetaImagenes = '../../imagenes/';
+
+if(!is_dir($carpetaImagenes)){
+
+  mkdir($carpetaImagenes );
+}
+
+//generar un nombre unico
+$nombreImagen = md5(uniqid(rand(), true)).".jpg";
+
+//subir la iamgen
+move_uploaded_file($imagen['tmp_name'],$carpetaImagenes.$nombreImagen);
+
+
+$query = "INSERT INTO propiedades (titulo,precio,imagen,descripcion,habitaciones,wc,
+estacionamient,creado, idVendedores) 
+values  ('$titulo','$precio',' $nombreImagen ',' $descripcion','$habitaciones','$wc',
+'$estacionamiento', '$creado','$vendedorId')";
 
 
 $resultado = mysqli_query($db,$query);
@@ -90,7 +113,7 @@ if($resultado){
 redireccionar al usuario
 el header solo funciona si anteriormente no hay html 
 */
-header('Location: /udemyphpcurso/BinesRaices/admin');
+header('Location: /udemyphpcurso/BinesRaices/admin?codigo=1');
 
 
 }

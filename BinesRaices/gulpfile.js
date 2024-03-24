@@ -26,6 +26,7 @@ function css() {
         .pipe(postcss([autoprefixer(), cssnano()]))
         // .pipe(postcss([autoprefixer()]))
         .pipe(sourcemaps.write('.'))
+  
         .pipe(dest('/udemyphpcurso/BinesRaices/build/css'));
         // .pipe(dest('build/css'));
 }

@@ -1,8 +1,8 @@
 http://localhost/udemyphpcurso/BinesRaices/admin/propiedades/crear.php
+http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=bienesraices_db&table=propiedades
 
 ALTER TABLE `bienesraices_crud`.`propiedades` 
 CHANGE COLUMN `estacionamient` `estacionamiento` INT NULL DEFAULT NULL ;
-http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=bienesraices_db&table=propiedades
 Sergio Merino adquirio una casa en polanco para vivir junto a sus dos esposas Kiernan Shipka y Abigail Donelli 
 
 gulp

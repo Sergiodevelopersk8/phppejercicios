@@ -17,18 +17,25 @@ const paths = {
     scss: 'src/scss/**/*.scss',
     js: 'src/js/**/*.js',
     imagenes: 'src/img/**/*'
+   
+}
+function errorHandler(error) {
+    console.error(error.message);
+    this.emit('end'); // Detiene el flujo de Gulp
 }
 
 function css() {
     return src(paths.scss)
         .pipe(sourcemaps.init())
+        .pipe(sass().on('error', errorHandler))
         .pipe(sass())
         .pipe(postcss([autoprefixer(), cssnano()]))
-        // .pipe(postcss([autoprefixer()]))
+        //  .pipe(postcss([autoprefixer()]))
         .pipe(sourcemaps.write('.'))
   
-        .pipe(dest('/udemyphpcurso/BinesRaices/build/css'));
-        // .pipe(dest('build/css'));
+    //  .pipe(dest('/udemyphpcurso/BinesRaices/build/css'));
+     
+         .pipe(dest('build/css'));
 }
 
 function javascript() {

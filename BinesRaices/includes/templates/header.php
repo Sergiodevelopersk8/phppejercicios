@@ -35,12 +35,9 @@
                 
             </div> <!--.barra-->
 <?php
-if($inicio){
+ echo $inicio ? "<h1>Venta de Casas y Departamentos  Exclusivos de Lujo</h1>" : '';
+
  ?>   
-    <h1>Venta de Casas y Departamentos  Exclusivos de Lujo</h1>
-<?php    
-}
-?>
-   
+
         </div>
     </header>

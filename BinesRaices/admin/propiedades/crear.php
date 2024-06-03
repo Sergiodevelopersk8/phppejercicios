@@ -1,4 +1,11 @@
 <?php
+require_once '../../includes/funciones.php';
+
+$auth = estaAutenticado();
+if(!$auth)
+{
+    header('Location: /udemyphpcurso/BinesRaices/index.php');
+}
 
 require '../../includes/config/database.php';
 $db = conectarDB();

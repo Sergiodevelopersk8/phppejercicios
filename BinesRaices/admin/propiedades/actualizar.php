@@ -1,4 +1,12 @@
 <?php
+require_once '../../includes/funciones.php';
+
+$auth = estaAutenticado();
+if(!$auth)
+{
+    header('Location: /udemyphpcurso/BinesRaices/index.php');
+}
+
 
 $id = $_GET['id'];
 $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -56,7 +64,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   /* Asignar files hacia una variable  */
   $imagen = $_FILES['image'];
-// var_dump($_FILES);
+
 
     if(!$titulo){
       $errores[] = "Debes añadir un titulo";
@@ -157,7 +165,7 @@ header('Location: /udemyphpcurso/BinesRaices/admin?codigo=2');
 
 }
 
-require_once '../../includes/funciones.php';
+
 incluirTemplate('header');
 ?>
 

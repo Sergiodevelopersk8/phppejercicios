@@ -1,6 +1,7 @@
 <?php
 
-require 'includes/config/database.php';
+//include el header
+require 'includes/app.php';
 
 $db = conectarDB();
 
@@ -69,8 +70,7 @@ $errores [] = "El usuario no existe";
 }
 
 
-//include el header
-require 'includes/funciones.php';
+
 incluirTemplate('header');
 ?>
 

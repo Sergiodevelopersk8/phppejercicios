@@ -1,6 +1,5 @@
 <?php
 
-require 'includes\config\database.php';
 
 $id = $_GET['id'];
 $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -8,6 +7,8 @@ $id = filter_var($id, FILTER_VALIDATE_INT);
 if(!$id ){
     header('Location:anuncios.php');
 }
+
+require_once 'includes/app.php';
 //implementar base de datos
 
 $db = conectarDB();
@@ -26,7 +27,7 @@ if(!$resultado ->num_rows ){
 }
 
 
-require_once 'includes/funciones.php';
+
 incluirTemplate('header');
 ?>
 

@@ -3,7 +3,8 @@
 require_once '../../includes/app.php';
 
 use App\Propiedad;
-
+use Intervention\Image\ImageManager as Image;
+use Intervention\Image\Drivers\Gd\Driver;
 
 
 
@@ -18,7 +19,8 @@ $resultado = mysqli_query($db, $consulta);
 
 
 //arreglo con mensajes de errores
-$errores = [];
+$errores = Propiedad::getErrores();
+
 
 
 $titulo = '';
@@ -37,108 +39,59 @@ $imagen = null;  //variable para almacenar la imagen subida por el usuario
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
    
   $propiedad = new Propiedad($_POST);
- 
-  $propiedad-> Guardar();
+   
+  $carpetaImagenes = '../../imagenes/';
 
-    $titulo = mysqli_real_escape_string( $db,$_POST['titulo']);
-    $precio = mysqli_real_escape_string( $db,$_POST['precio']);
-    $descripcion = mysqli_real_escape_string( $db,$_POST[ 'descripcion']);  
-    $habitaciones = mysqli_real_escape_string( $db,$_POST[ 'habitaciones']);  
-    $wc = mysqli_real_escape_string( $db,$_POST[ 'wc']);  
-    $estacionamient = mysqli_real_escape_string( $db,$_POST[ 'estacionamient']);  
-    $vendedorId = mysqli_real_escape_string( $db,$_POST[ 'idVendedores']);  
 
-  /* Asignar files hacia una variable  */
-  $imagen = $_FILES['image'];
-// var_dump($_FILES);
 
-    if(!$titulo){
-      $errores[] = "Debes añadir un titulo";
-    }
-    if(!$precio){
-        $errores[] = "El precio es obligatorio";
-            }
+//generar un nombre unico
+    $nombreImagen = md5(uniqid(rand(), true)).".jpg";
 
-    if(strlen($descripcion) < 5){
-      $errores[] = "La descripción es obligatoria y debe tener al menos 10 caracteres";
-    }
-    if(!$habitaciones){
-        $errores[] = "El numero de habitaciones es obligatorio ";
-      }
 
-      if(!$precio){
-        $errores[] = "El precio es Obligatorio";
-      }
+//realiza resize
+    if($_FILES['image']['tmp_name']){
 
-      
-      if(!$estacionamient){
-        $errores[] = "El numero de estacionamientos es Obligatorio";
-      }
-      if(!$vendedorId){
-        $errores[] = "Elige el vendedor";
-      }
-
-      if(!$imagen['name'] || $imagen['error']){
-      $errores[] = "la imagen es obligatoria";
-      }
-
-/*Validar peso de la imagen */
-$medida = 1000 * 1000;
-if($imagen['size'] > $medida){
-  $errores[] = "La imagen es muy pesada";
+    $manager = new Image(Driver::class);
+    $image = $manager->read($_FILES['image']['tmp_name'])->cover(800,600);
+    $propiedad->setImagen($nombreImagen);
 }
+
+
+
+$errores = $propiedad-> validar();
 
 
 
 if(empty($errores)){
+    
+    
+    if(!is_dir(CARPETAS_IMAGENES)){
+        mkdir(CARPETAS_IMAGENES);
+    }
+    
+    /* Asignar files hacia una variable  */
+   
+    $image->save(CARPETAS_IMAGENES . $nombreImagen);
+    
+    
+    $resultado = $propiedad-> Guardar();
 
 
-/*Subir archivos
+    if($resultado){
 
-crear carpeta
-*/
-
-
-$carpetaImagenes = '../../imagenes/';
-
-if(!is_dir($carpetaImagenes)){
-
-  mkdir($carpetaImagenes );
-}
-
-//generar un nombre unico
-$nombreImagen = md5(uniqid(rand(), true)).".jpg";
-
-//subir la iamgen
-move_uploaded_file($imagen['tmp_name'],$carpetaImagenes.$nombreImagen);
-
-
-// $query = "INSERT INTO propiedades (titulo,precio,imagen,descripcion,habitaciones,wc,
-// estacionamient,creado, idVendedores) 
-// values  ('$titulo','$precio',' $nombreImagen ',' $descripcion','$habitaciones','$wc',
-// '$estacionamient', '$creado','$vendedorId')";
-
-
-
-$resultado = mysqli_query($db,$query);
-
-if($resultado){
-/*
-redireccionar al usuario
-el header solo funciona si anteriormente no hay html 
-*/
 header('Location: /udemyphpcurso/BinesRaices/admin?codigo=1');
 
 
-}
+    }
+
+    }
+
+
+
+
 
 }
 
-
-
-
-
-}
 
 require_once '../../includes/funciones.php';
 incluirTemplate('header');

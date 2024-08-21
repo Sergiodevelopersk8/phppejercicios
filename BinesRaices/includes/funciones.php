@@ -5,7 +5,7 @@
 /*EL _DIR_ PERMITE INCLUIR LAS UBICACIONES PARA APACHE */
 define('TEMPLATES_URL',__DIR__.'/templates');
 define('FUNCIONES_URL',__DIR__.'funciones.php');
-
+DEFINE('CARPETAS_IMAGENES', __DIR__. '/../imagenes/');
 function incluirTemplate(string $nombre, bool $inicio = false){
 
     include TEMPLATES_URL ."/$nombre.php";

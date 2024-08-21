@@ -13,5 +13,7 @@
             "email": "utp0001553@alumno.utpuebla.edu.mx"
         }
     ],
-    "require": {}
+    "require": {
+        "intervention/image": "^3.8"
+    }
 }

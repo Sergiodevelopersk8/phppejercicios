@@ -11,6 +11,12 @@ class Propiedad{
     protected static $columnasDB = ['id','titulo','precio','imagen','descripcion','habitaciones','wc','estacionamient','creado',
 'idVendedores'];
 
+//Errores
+
+    protected static $errores = [];
+
+
+
     public $id;
     public $titulo;
     public $precio;
@@ -38,14 +44,14 @@ class Propiedad{
         $this -> id = $args['id'] ??  '' ;
         $this -> titulo = $args['titulo'] ??  '' ;
         $this -> precio = $args['precio'] ??  '' ;
-        $this -> imagen = $args['imagen'] ??  'imagen.jpg' ;
+        $this -> imagen = $args['imagen'] ??  '' ;
         $this -> descripcion = $args['descripcion'] ??  '' ;
         $this -> habitaciones = $args['habitaciones'] ??  '' ;
         $this -> wc = $args['wc'] ??  '' ;
         $this -> estacionamient = $args['estacionamient'] ??  '' ;
         $this -> creado = date('Y/m/d') ;
         $this -> idVendedores = $args['idVendedores'] ??  '' ;
-
+        
 
         
     }
@@ -64,7 +70,7 @@ public function Guardar(){
 
     $resultado = self::$db->query($query);
 
-    debuguear($resultado); 
+    return $resultado; 
 }
 
 public function Atributos(){
@@ -89,6 +95,66 @@ public function sanitizarAtributos(){
 
 
  }
+
+//subir imagenes
+
+public function setImagen($imagen){
+    if($imagen){
+        $this->imagen = $imagen;
+    }
+}
+
+
+
+
+ //validacion
+
+ public static function getErrores(){
+    
+    return self::$errores;
+ }
+
+
+ public function validar(){
+    
+    if(!$this->titulo){
+        self::$errores[] = "Debes añadir un titulo";
+      }
+      if(!$this->precio){
+          self::$errores[] = "El precio es obligatorio";
+              }
+  
+              
+        if(strlen($this->descripcion) < 5){
+        self::$errores[] = "La descripción es obligatoria y debe tener al menos 10 caracteres";
+      }
+      if(!$this->habitaciones){
+          self::$errores[] = "El numero de habitaciones es obligatorio ";
+        }
+        
+        if(!$this->precio){
+          self::$errores[] = "El precio es Obligatorio";
+        }
+        
+        
+        if(!$this->estacionamient){
+            self::$errores[] = "El numero de estacionamientos es Obligatorio";
+        }
+        if(!$this->idVendedores){
+            self::$errores[] = "Elige el vendedor";
+        }
+        return self::$errores;
+
+        if(!$this->imagen){
+        self::$errores[] = "la imagen es obligatoria";
+        }
+        
+     
+        
+  return self::$errores;
+ }
+
+
 
 
 

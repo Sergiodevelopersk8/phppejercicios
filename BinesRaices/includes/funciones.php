@@ -13,16 +13,34 @@ function incluirTemplate(string $nombre, bool $inicio = false){
 
 
 
-function estaAutenticado() : bool{
+// function estaAutenticado() : bool{
+//     session_start();
+//     $auth =$_SESSION['login'];
+//     if($auth)
+//     {
+//         return true;
+//     }
+    
+//      return false;
+//     }
+
+function estaAutenticado(){
     session_start();
-    $auth =$_SESSION['login'];
-    if($auth)
+    
+    if(!$_SESSION['login'])
     {
-        return true;
+        header('http://localhost/udemyphpcurso/BinesRaices/login.php');
     }
     
-     return false;
-    
+     
+    }
 
 
-}
+    function debuguear($variable){
+        echo '<pre>';
+
+var_dump($variable);
+echo '</pre>';
+
+exit;
+    }

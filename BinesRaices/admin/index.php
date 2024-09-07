@@ -1,16 +1,12 @@
 <?php
-require_once '../includes/funciones.php';
+require_once '../includes/app.php';
+estaAutenticado();
 
-$auth = estaAutenticado();
-if(!$auth)
-{
-    header('Location: /udemyphpcurso/BinesRaices/index.php');
-}
+use App\Propiedad;
 
-
-//importar la conecxion
-require '../includes/config/database.php';
-$db = conectarDB();
+//implementar metodo para obtener todas las propieades
+$propiedades = Propiedad::all();
+debuguear($propiedades);
 
 //escribir el query
 $query = "SELECT * FROM propiedades";

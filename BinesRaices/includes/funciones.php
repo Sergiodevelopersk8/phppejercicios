@@ -13,16 +13,7 @@ function incluirTemplate(string $nombre, bool $inicio = false){
 
 
 
-// function estaAutenticado() : bool{
-//     session_start();
-//     $auth =$_SESSION['login'];
-//     if($auth)
-//     {
-//         return true;
-//     }
-    
-//      return false;
-//     }
+
 
 function estaAutenticado(){
     session_start();
@@ -43,4 +34,11 @@ var_dump($variable);
 echo '</pre>';
 
 exit;
+    }
+
+
+    //escapa el html
+    function sant($html){
+$s = htmlspecialchars($html);
+return $s;
     }

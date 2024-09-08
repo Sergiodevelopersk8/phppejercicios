@@ -50,7 +50,7 @@ class Propiedad{
         $this -> wc = $args['wc'] ??  '' ;
         $this -> estacionamient = $args['estacionamient'] ??  '' ;
         $this -> creado = date('Y/m/d') ;
-        $this -> idVendedores = $args['idVendedores'] ??  '' ;
+        $this -> idVendedores = $args['idVendedores'] ??  1 ;
         
 
         

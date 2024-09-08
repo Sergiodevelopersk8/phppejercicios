@@ -6,7 +6,7 @@ use App\Propiedad;
 
 //implementar metodo para obtener todas las propieades
 $propiedades = Propiedad::all();
-debuguear($propiedades);
+
 
 //escribir el query
 $query = "SELECT * FROM propiedades";
@@ -76,22 +76,22 @@ incluirTemplate('header');
         </tr>
     </thead>
     <tbody>
-        <?php while($propiedad = mysqli_fetch_assoc($resultadoConsulta)){?>
+        <?php foreach($propiedades as $propiedad){?>
         <tr>
-            <td><?php echo $propiedad['id'];?></td>
-            <td><?php echo $propiedad['titulo'];?></td>
+            <td><?php echo $propiedad->id;?></td>
+            <td><?php echo $propiedad->titulo;?></td>
             
             <td>
-                <img src="../imagenes/<?php echo trim($propiedad['imagen']);?>" class="imagen-tabla" alt=" ">
+                <img src="../imagenes/<?php echo trim($propiedad->imagen);?>" class="imagen-tabla" alt=" ">
             </td>
             
-            <td><?php echo $propiedad['precio'];?></td>
+            <td><?php echo $propiedad->precio;?></td>
             <td>
                 <form method="POST" class="w-100">
-                    <input type="hidden" name="id" value="<?php echo $propiedad['id']; ?>">
+                    <input type="hidden" name="id" value="<?php echo $propiedad->id; ?>">
                     <input type="submit" class="boton-rojo-block-eliminar" value="Eliminar"  >
                 </form>
-                <a href="/udemyphpcurso/BinesRaices/admin/propiedades/actualizar.php?id=<?php echo $propiedad['id']; ?>" class="boton-amarillo-block">Actualizar</a>
+                <a href="/udemyphpcurso/BinesRaices/admin/propiedades/actualizar.php?id=<?php echo $propiedad->id; ?>" class="boton-amarillo-block">Actualizar</a>
             </td>
         </tr>
         <?php } ?>

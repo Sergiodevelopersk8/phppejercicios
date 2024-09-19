@@ -11,6 +11,12 @@
                 
                 <label for="imagen">Imagen: </label>
                 <input type="file"  id="imagen"  accept="image/jpeg, image/png" name="image" >
+                <?php if($propiedad->imagen){?>
+
+
+<img src="../../imagenes/<?php echo $propiedad->imagen ?>" class="img-samll">
+
+                <?php }?>
 
                 <label for="descripcion">Descripcion</label>
                 <textarea name="descripcion" id="descripcion"> <?php echo sant($propiedad->descripcion); ?> </textarea>

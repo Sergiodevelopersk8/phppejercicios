@@ -27,7 +27,7 @@ $db = conectarDB();
 //ejecutar el código después de que el usuario envia el  formulario 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
    
-  $propiedad = new Propiedad($_POST);
+  $propiedad = new Propiedad($_POST['propiedad']);
    
   $carpetaImagenes = '../../imagenes/';
 
@@ -38,10 +38,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
 //realiza resize
-    if($_FILES['image']['tmp_name']){
+    if($_FILES['propiedad']['tmp_name']['image']){
 
     $manager = new Image(Driver::class);
-    $image = $manager->read($_FILES['image']['tmp_name'])->cover(800,600);
+    $image = $manager->read($_FILES['propiedad']['tmp_name']['image'])->cover(800,600);
     $propiedad->setImagen($nombreImagen);
 }
 

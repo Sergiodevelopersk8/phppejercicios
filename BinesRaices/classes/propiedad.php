@@ -2,7 +2,7 @@
 
 namespace App;
 
-
+use Intervention\Image\Colors\Hsv\Channels\Value;
 
 class Propiedad{
 
@@ -209,6 +209,20 @@ protected static function crearObjeto($registro){
     }
 return $objeto;
 }
+
+
+        //sincronizar en memoria los cambios relizado por el usuario
+
+        public function sincronizar($args = []){
+            foreach($args as $key=> $value){
+                if(property_exists($this, $key)&& is_null(($value))){
+                    $this->$key = $value;
+
+                }
+            }
+        }
+
+
 
 
 

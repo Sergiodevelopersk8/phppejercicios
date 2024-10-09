@@ -15,8 +15,6 @@ header('Location:/udemyphpcurso/BinesRaices/admin/');
 }
 
 
-
-
 /**Obtener los datos de la propiedad  */
 
  
@@ -28,60 +26,25 @@ $propiedad = Propiedad::find($id);
 $consulta = "SELECT * FROM vendedores";
 $resultado = mysqli_query($db, $consulta);
 
-
-
 //arreglo con mensajes de errores
-$errores = [];
+$errores = Propiedad::getErrores();
 
 
 
 //ejecutar el código después de que el usuario envia el  formulario 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
    
+//asignar atributos
+
   $args = $_POST['propiedad'];
   
   
   $propiedad->sincronizar($args);
+// debuguear($propiedad);
 
+$errores = $propiedad->validar();
 
-  /* Asignar files hacia una variable  */
-  $imagen = $_FILES['image'];
-
-
-    if(!$titulo){
-      $errores[] = "Debes añadir un titulo";
-    }
-    if(!$precio){
-        $errores[] = "El precio es obligatorio";
-            }
-
-    if(strlen($descripcion) < 5){
-      $errores[] = "La descripción es obligatoria y debe tener al menos 10 caracteres";
-    }
-    if(!$habitaciones){
-        $errores[] = "El numero de habitaciones es obligatorio ";
-      }
-
-      if(!$precio){
-        $errores[] = "El precio es Obligatorio";
-      }
-
-      
-      if(!$estacionamiento){
-        $errores[] = "El numero de estacionamientos es Obligatorio";
-      }
-      if(!$vendedorId){
-        $errores[] = "Elige el vendedor";
-      }
-
-
-/*Validar peso de la imagen */
-$medida = 1000 * 1000;
-if($imagen['size'] > $medida){
-  $errores[] = "La imagen es muy pesada";
-}
-
-
+// $imagen = $_FILES['image'];
 
 if(empty($errores)){
 
@@ -96,24 +59,26 @@ if(empty($errores)){
 
 /*Subir archivos */
 
+/*aqui va el if de la imagen */
+
 if($imagen['name']){
   
-/**eliminar la imagen previa */
-
-unlink($carpetaImagenes . $propiedad['imagen'] );
-
-//generar un nombre unico
-$nombreImagen = md5(uniqid(rand(), true)).".jpg";
-
-//subir la iamgen
-move_uploaded_file($imagen['tmp_name'],$carpetaImagenes.$nombreImagen);
-
-}
-
-else{
-  $nombreImagen = $propiedad['imagen'];
-}
-
+  /**eliminar la imagen previa */
+  
+  unlink($carpetaImagenes . $propiedad['imagen'] );
+  
+  //generar un nombre unico
+  $nombreImagen = md5(uniqid(rand(), true)).".jpg";
+  
+  //subir la iamgen
+  move_uploaded_file($imagen['tmp_name'],$carpetaImagenes.$nombreImagen);
+  
+  }
+  
+  else{
+    $nombreImagen = $propiedad['imagen'];
+  }
+  
 /*crear carpeta*/
 
 
@@ -126,8 +91,7 @@ estacionamient = $estacionamiento, idVendedores = $vendedorId  WHERE id = $id";
 
 
 
-
-$resultado = mysqli_query($db,$query);
+ //$resultado = mysqli_query($db,$query);
 
 if($resultado){
 /*

@@ -120,9 +120,7 @@ public function setImagen($imagen){
     if(!$this->titulo){
         self::$errores[] = "Debes añadir un titulo";
       }
-      if(!$this->precio){
-          self::$errores[] = "El precio es obligatorio";
-              }
+     
   
               
         if(strlen($this->descripcion) < 5){
@@ -215,7 +213,7 @@ return $objeto;
 
         public function sincronizar($args = []){
             foreach($args as $key=> $value){
-                if(property_exists($this, $key)&& is_null(($value))){
+                if(property_exists($this, $key)&& !is_null(($value))){
                     $this->$key = $value;
 
                 }

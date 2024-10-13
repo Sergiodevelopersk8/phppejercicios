@@ -57,6 +57,25 @@ class Propiedad{
     }
 
 public function Guardar(){
+
+if(isset($this->id)){
+
+    $this->actualizar();
+
+}
+
+else{
+
+$this->crear();
+
+}
+
+
+
+}
+
+
+public function crear(){
     
     //sanitizar los datos
 
@@ -72,6 +91,43 @@ public function Guardar(){
 
     return $resultado; 
 }
+
+public function actualizar(){
+
+$atributos = $this->sanitizarAtributos();
+
+$valores = [];
+foreach ($atributos as $key => $valor) {
+
+$valores[] = "{$key}='{$valor}'";
+
+
+}
+
+$query = "UPDATE propiedades  SET ";
+$query .= join(', ', $valores);
+$query .= " WHERE id='".self::$db->escape_string($this->id)."' ";
+$query .= " LIMIT 1";
+
+$resultado = self::$db->query($query);
+
+
+if($resultado){
+    /*
+    redireccionar al usuario
+    el header solo funciona si anteriormente no hay html 
+    */
+    header('Location: /udemyphpcurso/BinesRaices/admin?codigo=2');
+
+
+    }
+
+
+
+
+}
+
+
 
 public function Atributos(){
     $atributos = [];
@@ -99,6 +155,21 @@ public function sanitizarAtributos(){
 //subir imagenes
 
 public function setImagen($imagen){
+
+    //elimina la imagen previa
+
+    if(isset($this->id)){
+        //comprobar si existe el archivo
+        $existeArchivo = file_exists(CARPETAS_IMAGENES.$this->imagen);
+        if($existeArchivo){
+            unlink(CARPETAS_IMAGENES.$this->imagen);
+        }
+
+    }
+
+
+
+    //asignar al atributo de la imagen ek nombre de la imagen
     if($imagen){
         $this->imagen = $imagen;
     }

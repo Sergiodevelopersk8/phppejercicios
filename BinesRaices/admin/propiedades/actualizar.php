@@ -1,6 +1,8 @@
 <?php
 
 use App\Propiedad;
+use Intervention\Image\ImageManager as Image;
+use Intervention\Image\Drivers\Gd\Driver;
 
 require_once '../../includes/app.php';
 
@@ -31,6 +33,7 @@ $errores = Propiedad::getErrores();
 
 
 
+
 //ejecutar el código después de que el usuario envia el  formulario 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
    
@@ -40,76 +43,41 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
   
   
   $propiedad->sincronizar($args);
-// debuguear($propiedad);
 
-$errores = $propiedad->validar();
+    // validar
 
-// $imagen = $_FILES['image'];
+    $errores = $propiedad->validar();
 
-if(empty($errores)){
 
-  $carpetaImagenes = '../../imagenes/';
+    //generar un nombre unico
+    $nombreImagen = md5(uniqid(rand(), true)).".jpg";
 
-  if(!is_dir($carpetaImagenes)){
- 
-    mkdir($carpetaImagenes );
-  }
+        //realiza resize
+    if($_FILES['propiedad']['tmp_name']['image']){
 
-  $nombreImagen = '';
+        $manager = new Image(Driver::class);
+        $image = $manager->read($_FILES['propiedad']['tmp_name']['image'])->cover(800,600);
+        $propiedad->setImagen($nombreImagen);
+    }
 
-/*Subir archivos */
 
-/*aqui va el if de la imagen */
 
-if($imagen['name']){
+    if(empty($errores)){
+
+  //almacenar la imagen
+  $image->save(CARPETAS_IMAGENES.$nombreImagen);
   
-  /**eliminar la imagen previa */
+        $propiedad->guardar();
   
-  unlink($carpetaImagenes . $propiedad['imagen'] );
-  
-  //generar un nombre unico
-  $nombreImagen = md5(uniqid(rand(), true)).".jpg";
-  
-  //subir la iamgen
-  move_uploaded_file($imagen['tmp_name'],$carpetaImagenes.$nombreImagen);
-  
-  }
-  
-  else{
-    $nombreImagen = $propiedad['imagen'];
-  }
-  
-/*crear carpeta*/
+
+
+    }
 
 
 
 
 
-$query = "UPDATE propiedades  SET titulo = '$titulo', precio =  '$precio',  imagen = '$nombreImagen',  descripcion = '$descripcion',
-habitaciones = $habitaciones, wc = $wc,
-estacionamient = $estacionamiento, idVendedores = $vendedorId  WHERE id = $id";
-
-
-
- //$resultado = mysqli_query($db,$query);
-
-if($resultado){
-/*
-redireccionar al usuario
-el header solo funciona si anteriormente no hay html 
-*/
-header('Location: /udemyphpcurso/BinesRaices/admin?codigo=2');
-
-
-}
-
-}
-
-
-
-
-
-}
+    }
 
 
 incluirTemplate('header');

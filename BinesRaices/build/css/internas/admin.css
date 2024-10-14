@@ -48,8 +48,11 @@ th{
      display: block;
      border: none;
      width: 100%;
+     cursor: pointer;
 }
-
+input[type="submit"].boton-rojo-block-eliminar:hover{
+    background-color: rgb(154, 12, 12);;
+}
 
 
 

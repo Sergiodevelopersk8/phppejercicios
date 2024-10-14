@@ -57,16 +57,19 @@ class Propiedad{
     }
 
 public function Guardar(){
-
-if(isset($this->id)){
-
+   
+    $identificador = $this->id;
+   
+if(isset($this->id) && $identificador != ""){
+    
     $this->actualizar();
-
+    
 }
 
-else{
+else {
 
-$this->crear();
+    
+    $this->crear();
 
 }
 
@@ -89,6 +92,15 @@ public function crear(){
 
     $resultado = self::$db->query($query);
 
+    if($resultado){
+        /*
+        redireccionar al usuario
+        el header solo funciona si anteriormente no hay html 
+        */
+        header('Location: /udemyphpcurso/BinesRaices/admin?codigo=1');
+    
+    
+        }
     return $resultado; 
 }
 
@@ -127,7 +139,18 @@ if($resultado){
 
 }
 
+//eliminar
+public function eliminar(){
 
+    $query = " DELETE FROM propiedades WHERE id = " . self::$db->escape_string($this->id)." LIMIT 1";
+    $resultado = self::$db->query($query);
+
+    if($resultado){
+        $this->borrarImagen();
+        header('Location:/udemyphpcurso/BinesRaices/admin?codigo=3');
+    }
+
+}
 
 public function Atributos(){
     $atributos = [];
@@ -156,14 +179,13 @@ public function sanitizarAtributos(){
 
 public function setImagen($imagen){
 
+    $identificador = $this->id;
+
     //elimina la imagen previa
 
-    if(isset($this->id)){
-        //comprobar si existe el archivo
-        $existeArchivo = file_exists(CARPETAS_IMAGENES.$this->imagen);
-        if($existeArchivo){
-            unlink(CARPETAS_IMAGENES.$this->imagen);
-        }
+    if(isset($this->id) && $identificador != ""){
+        
+       $this->borrarImagen();
 
     }
 
@@ -174,6 +196,18 @@ public function setImagen($imagen){
         $this->imagen = $imagen;
     }
 }
+
+
+
+//eliminar archivo de imagen
+public function borrarImagen(){
+    //comprobamos si existe el archivo
+    $existeArchivo = file_exists(CARPETAS_IMAGENES.$this->imagen);
+    if($existeArchivo){
+        unlink(CARPETAS_IMAGENES.$this->imagen);
+    }
+}
+
 
 
 

@@ -41,7 +41,7 @@ class Propiedad{
     public function __construct($args = [])
     {
 
-        $this -> id = $args['id'] ??  '' ;
+        $this -> id = $args['id'] ??  null ;
         $this -> titulo = $args['titulo'] ??  '' ;
         $this -> precio = $args['precio'] ??  '' ;
         $this -> imagen = $args['imagen'] ??  '' ;
@@ -58,9 +58,9 @@ class Propiedad{
 
 public function Guardar(){
    
-    $identificador = $this->id;
+  
    
-if(isset($this->id) && $identificador != ""){
+if(!is_null($this->id) ){
     
     $this->actualizar();
     
@@ -183,7 +183,7 @@ public function setImagen($imagen){
 
     //elimina la imagen previa
 
-    if(isset($this->id) && $identificador != ""){
+    if(!is_null($this->id)){
         
        $this->borrarImagen();
 

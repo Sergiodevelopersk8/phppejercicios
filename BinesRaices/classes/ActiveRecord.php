@@ -6,8 +6,7 @@ class ActiveRecord{
 
 //db
 protected static $db;
-protected static $columnasDB = ['id','titulo','precio','imagen','descripcion','habitaciones','wc','estacionamient','creado',
-'idVendedores'];
+protected static $columnasDB = [];
 protected static $tabla = '';
 
 //Errores
@@ -37,23 +36,7 @@ public static function setDB($database){
 
 
 
-public function __construct($args = [])
-{
 
-    $this -> id = $args['id'] ??  null ;
-    $this -> titulo = $args['titulo'] ??  '' ;
-    $this -> precio = $args['precio'] ??  '' ;
-    $this -> imagen = $args['imagen'] ??  '' ;
-    $this -> descripcion = $args['descripcion'] ??  '' ;
-    $this -> habitaciones = $args['habitaciones'] ??  '' ;
-    $this -> wc = $args['wc'] ??  '' ;
-    $this -> estacionamient = $args['estacionamient'] ??  '' ;
-    $this -> creado = date('Y/m/d') ;
-    $this -> idVendedores = $args['idVendedores'] ??  1 ;
-    
-
-    
-}
 
 public function Guardar(){
 
@@ -302,7 +285,7 @@ return $array;
 
 protected static function crearObjeto($registro){
 
-$objeto = new self;
+$objeto = new static;
 
 foreach($registro as $key => $value ){
     if(property_exists($objeto, $key)){

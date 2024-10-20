@@ -13,8 +13,10 @@ estaAutenticado();
 $db = conectarDB();
 $propiedad = new Propiedad;
 // consultar los vendedores
+/*
 $consulta = "SELECT * FROM vendedores";
 $resultado = mysqli_query($db, $consulta);
+*/
 
 
 
@@ -66,18 +68,14 @@ if(empty($errores)){
     $resultado = $propiedad-> Guardar();
 
 
-    if($resultado){
+    /*if($resultado){
 
 header('Location: /udemyphpcurso/BinesRaices/admin?codigo=1');
 
 
-    }
+    }*/
 
     }
-
-
-
-
 
 }
 

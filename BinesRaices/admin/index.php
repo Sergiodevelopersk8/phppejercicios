@@ -3,9 +3,11 @@ require_once '../includes/app.php';
 estaAutenticado();
 
 use App\Propiedad;
+use App\Vendedor;
 
 //implementar metodo para obtener todas las propieades
 $propiedades = Propiedad::all();
+$vendedor = Vendedor::all();
 
 
 //escribir el query

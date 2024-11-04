@@ -3,6 +3,7 @@
 require_once '../../includes/app.php';
 
 use App\Propiedad;
+use App\Vendedor;
 use Intervention\Image\ImageManager as Image;
 use Intervention\Image\Drivers\Gd\Driver;
 
@@ -10,13 +11,10 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 estaAutenticado();
 
-$db = conectarDB();
 $propiedad = new Propiedad;
+
 // consultar los vendedores
-/*
-$consulta = "SELECT * FROM vendedores";
-$resultado = mysqli_query($db, $consulta);
-*/
+$vendedores = Vendedor::all();
 
 
 

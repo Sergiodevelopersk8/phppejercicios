@@ -7,7 +7,7 @@ use App\Vendedor;
 
 //implementar metodo para obtener todas las propieades
 $propiedades = Propiedad::all();
-$vendedor = Vendedor::all();
+$vendedores = Vendedor::all();
 
 
 //escribir el query

@@ -42,6 +42,22 @@
             </fieldset>
 <fieldset>
     <legend>Vendedor</legend>
-    
+    <label for="vendedor">vendedor</label>
+    <select name="propiedad[idVendedores]" id="vendedor">
+        <option selected value="">--- Seleccione --- </option>
+        <?php
+        for($i = 0; $i < count($vendedores); $i++){ ?>
+       
+       
+            <option 
+            <?php echo $propiedad->idVendedores === $vendedores[$i]->idVendedores ? 'selected' : '' ?>
+            value="<?php echo sant($vendedores[$i]->idVendedores)?>"> <?php echo sant($vendedores[$i]->nombre) . " ".sant($vendedores[$i]->apellido);?></option>
+
+       <?php
+
+        }
+       
+       ?>
+    </select>
     </fieldset>
     <!-- $vendedorId === $vendedor['idVendedores'] si -> ? agrega -> 'selected' else -> : agrega -> ''; -->

@@ -25,6 +25,9 @@ public $wc;
 public $estacionamient;
 public $creado;
 public $idVendedores;
+public $nombre;
+public $apellido;
+public $telefono;
 
 public static function setDB($database){
 

@@ -64,7 +64,12 @@ incluirTemplate('header');
     <?php }?>
 
         <a href ="/udemyphpcurso/BinesRaices/admin/propiedades/crear.php" class ="boton boton-verde">Nueva propiedad</a>
-   <table class="propiedades">
+   
+    <h2>Propiedades</h2>
+   
+        <table class="propiedades">
+
+
     <thead>
         <tr>
             <th>ID</th>
@@ -96,10 +101,44 @@ incluirTemplate('header');
         <?php } ?>
     </tbody>
    </table>
-    </main>
+  
+<h2>Vendedores</h2>
+<table class="propiedades">
+
+
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php for($i = 0; $i < count($vendedores); $i++){?>
+        <tr>
+            <td><?php echo $vendedores[$i]->idVendedores;?></td>
+            <td><?php echo $vendedores[$i]->nombre. " " . $vendedores[$i]->apellido;?></td>
+            <td><?php echo $vendedores[$i]->telefono;?></td>
+            
+            
+            
+          
+            <td>
+                <form method="POST" class="w-100">
+                    <input type="hidden" name="id" value="<?php echo $vendedores[$i]->idVendedores; ?>">
+                    <input type="submit" class="boton-rojo-block-eliminar" value="Eliminar"  >
+                </form>
+                <a href="/udemyphpcurso/BinesRaices/admin/vendedores/actualizar.php?id=<?php echo $vendedores[$i]->idVendedores; ?>" class="boton-amarillo-block">Actualizar</a>
+            </td>
+        </tr>
+        <?php } ?>
+    </tbody>
+   </table>
+
+</main>
 
     <?php
-    //cerrar la conexion
-mysqli_close($db);
+
 incluirTemplate('footer');
 ?>

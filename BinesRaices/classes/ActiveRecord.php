@@ -136,7 +136,7 @@ if($resultado){
 
 public function Atributos(){
 $atributos = [];
-foreach(self::$columnasDB as $columna){
+foreach(static::$columnasDB as $columna){
     if($columna === 'id') continue;
 $atributos[$columna] = $this->$columna;
 }
@@ -198,45 +198,17 @@ if($existeArchivo){
 
 public static function getErrores(){
 
-return self::$errores;
+
+    static::$errores = [];
+    return static::$errores;
 }
 
 
 public function validar(){
 
-if(!$this->titulo){
-    self::$errores[] = "Debes añadir un titulo";
-  }
- 
 
-          
-    if(strlen($this->descripcion) < 5){
-    self::$errores[] = "La descripción es obligatoria y debe tener al menos 10 caracteres";
-  }
-  if(!$this->habitaciones){
-      self::$errores[] = "El numero de habitaciones es obligatorio ";
-    }
     
-    if(!$this->precio){
-      self::$errores[] = "El precio es Obligatorio";
-    }
-    
-    
-    if(!$this->estacionamient){
-        self::$errores[] = "El numero de estacionamientos es Obligatorio";
-    }
-    if(!$this->idVendedores){
-        self::$errores[] = "Elige el vendedor";
-    }
-    return self::$errores;
-
-    if(!$this->imagen){
-    self::$errores[] = "la imagen es obligatoria";
-    }
-    
- 
-    
-return self::$errores;
+return static::$errores;
 }
 
 
@@ -271,7 +243,7 @@ $resultado = self::$db->query($query);
 //iterar los resultados
 $array = [];
 while($registro = $resultado->fetch_assoc()){
-$array[] = self::crearObjeto($registro);
+$array[] = static::crearObjeto($registro);
 }
 
 //liberar memoria

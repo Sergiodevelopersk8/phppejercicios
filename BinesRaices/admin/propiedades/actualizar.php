@@ -1,6 +1,7 @@
 <?php
 
 use App\Propiedad;
+use App\Vendedor;
 use Intervention\Image\ImageManager as Image;
 use Intervention\Image\Drivers\Gd\Driver;
 
@@ -17,16 +18,19 @@ header('Location:/udemyphpcurso/BinesRaices/admin/');
 }
 
 
+
+
+
+
+
 /**Obtener los datos de la propiedad  */
 
  
 $propiedad = Propiedad::find($id);
 
+$vendedores = Vendedor::all();
 
 
-// consultar los vendedores
-$consulta = "SELECT * FROM vendedores";
-$resultado = mysqli_query($db, $consulta);
 
 //arreglo con mensajes de errores
 $errores = Propiedad::getErrores();
@@ -63,9 +67,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
     if(empty($errores)){
+        if($_FILES['propiedad']['tmp_name']['image']){
 
-  //almacenar la imagen
-  $image->save(CARPETAS_IMAGENES.$nombreImagen);
+            //almacenar la imagen
+            $image->save(CARPETAS_IMAGENES.$nombreImagen);
+        }
   
         $propiedad->guardar();
   

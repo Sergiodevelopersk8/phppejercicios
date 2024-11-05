@@ -42,6 +42,42 @@ public function __construct($args = [])
     
 }
 
+public function validar(){
 
+    if(!$this->titulo){
+        self::$errores[] = "Debes añadir un titulo para la propiedad";
+      }
+     
+    
+              
+        if(strlen($this->descripcion) < 5){
+        self::$errores[] = "La descripción es obligatoria y debe tener al menos 10 caracteres";
+      }
+      if(!$this->habitaciones){
+          self::$errores[] = "El numero de habitaciones es obligatorio ";
+        }
+        
+        if(!$this->precio){
+          self::$errores[] = "El precio es Obligatorio";
+        }
+        
+        
+        if(!$this->estacionamient){
+            self::$errores[] = "El numero de estacionamientos es Obligatorio";
+        }
+        if(!$this->idVendedores){
+            self::$errores[] = "Elige el vendedor";
+        }
+        return self::$errores;
+    
+        if(!$this->imagen){
+        self::$errores[] = "la imagen de la propiedad es obligatoria";
+        }
+        
+     
+        
+    return self::$errores;
+    }
+    
 
 }

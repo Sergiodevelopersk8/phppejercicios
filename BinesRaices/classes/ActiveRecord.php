@@ -128,6 +128,7 @@ header('Location: /udemyphpcurso/BinesRaices/admin?codigo=2');
 public function eliminar(){
 
 $query = " DELETE FROM ". static::$tabla  ." WHERE id = " . self::$db->escape_string($this->id)." LIMIT 1";
+
 $resultado = self::$db->query($query);
 
 if($resultado){
@@ -136,6 +137,22 @@ if($resultado){
 }
 
 }
+
+public function eliminarvendedor(){
+
+    $query = " DELETE FROM ". static::$tabla ." WHERE idVendedores = " . self::$db->escape_string($this->idVendedores)." LIMIT 1";
+    // debuguear($query);
+
+    $resultado = self::$db->query($query);
+    
+
+
+    if($resultado){
+        $this->borrarImagen();
+        header('Location:/udemyphpcurso/BinesRaices/admin?codigo=3');
+    }
+    
+    }
 
 public function Atributos(){
 $atributos = [];
@@ -236,6 +253,15 @@ return array_shift($resultado);
 
 }
 
+public static function findvendedor($id){
+
+    $query = "SELECT * FROM  " . static::$tabla ." WHERE idVendedores = $id ";
+    $resultado = self::consultarSQL($query);
+    
+    
+    return array_shift($resultado);
+    
+    }
 
 public static function consultarSQL($query){
 //consulta la base de datos

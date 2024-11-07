@@ -36,8 +36,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' ){
             //compara lo que vamos a eliminar
             if($tipo == 'vendedor'){
                 
-                $vendedores = Vendedor::findvendedor($id);
-                $vendedores->eliminarvendedor();
+                $vendedores = Vendedor::find($id);
+                $vendedores->eliminar();
             }   
             
             else if($tipo == 'propiedad'){
@@ -85,6 +85,7 @@ incluirTemplate('header');
     <?php }?>
 
         <a href ="/udemyphpcurso/BinesRaices/admin/propiedades/crear.php" class ="boton boton-verde">Nueva propiedad</a>
+        <a href ="/udemyphpcurso/BinesRaices/admin/vendedores/crear.php" class ="boton boton-amarillo">Nuevo(a) Vendedor</a>
    
     <h2>Propiedades</h2>
    

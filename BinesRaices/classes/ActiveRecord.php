@@ -8,6 +8,8 @@ class ActiveRecord{
 protected static $db;
 protected static $columnasDB = [];
 protected static $tabla = '';
+protected static $where = '';
+protected static $tablas = '';
 
 //Errores
 
@@ -127,7 +129,18 @@ header('Location: /udemyphpcurso/BinesRaices/admin?codigo=2');
 //eliminar
 public function eliminar(){
 
-$query = " DELETE FROM ". static::$tabla  ." WHERE id = " . self::$db->escape_string($this->id)." LIMIT 1";
+    $tablas = static::$tabla;
+
+    if($tablas =='vendedores'){
+        $query = " DELETE FROM ". static::$tabla  ." WHERE idVendedores = " . self::$db->escape_string($this->idVendedores)." LIMIT 1";
+    }
+    
+    else if($tablas == 'propiedades'){
+        $query = " DELETE FROM ". static::$tabla  ." WHERE id = " . self::$db->escape_string($this->id)." LIMIT 1";
+
+}
+
+
 
 $resultado = self::$db->query($query);
 
@@ -138,21 +151,7 @@ if($resultado){
 
 }
 
-public function eliminarvendedor(){
 
-    $query = " DELETE FROM ". static::$tabla ." WHERE idVendedores = " . self::$db->escape_string($this->idVendedores)." LIMIT 1";
-    // debuguear($query);
-
-    $resultado = self::$db->query($query);
-    
-
-
-    if($resultado){
-        $this->borrarImagen();
-        header('Location:/udemyphpcurso/BinesRaices/admin?codigo=3');
-    }
-    
-    }
 
 public function Atributos(){
 $atributos = [];
@@ -243,25 +242,42 @@ return $resultado;
 }
 
 //busca el registro por su id
+
+public static function find($id){
+
+$tablas = static::$tabla;
+
+    if($tablas =='vendedores'){
+        $where = " WHERE idVendedores = ";
+    }
+    
+    else if($tablas == 'propiedades'){
+   $where = " WHERE id = ";
+
+}
+
+    $query = "SELECT * FROM  " . static::$tabla . $where . $id ;
+   
+
+$resultado = self::consultarSQL($query);
+return array_shift($resultado);
+
+}
+/*
 public static function find($id){
 
 $query = "SELECT * FROM  " . static::$tabla ." WHERE id = $id ";
 
 $resultado = self::consultarSQL($query);
-
+debuguear($resultado);
 return array_shift($resultado);
 
 }
 
-public static function findvendedor($id){
+*/
 
-    $query = "SELECT * FROM  " . static::$tabla ." WHERE idVendedores = $id ";
-    $resultado = self::consultarSQL($query);
-    
-    
-    return array_shift($resultado);
-    
-    }
+
+
 
 public static function consultarSQL($query){
 //consulta la base de datos

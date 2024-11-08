@@ -24,7 +24,7 @@ incluirTemplate('header');
 ?>
 
 <main class="contenedor seccion">
-        <h1>Registrar Vendedor(a)</h1>
+        <h1>Actualizar Vendedor(a)</h1>
         
         <a href ="/udemyphpcurso/BinesRaices/admin" class ="boton boton-verde">Volver</a>
        

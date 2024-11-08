@@ -33,7 +33,7 @@ if(empty($error)){
 
 $query = "SELECT * FROM usuarios WHERE email = '$email'";
 $resultado = mysqli_query($db, $query);
-// var_dump($resultado);
+
 
 if($resultado->num_rows){
 //revisa si el password es correcto
@@ -54,6 +54,7 @@ if($aut){
 
 }else{
     $errores[] = "el password es incorrecto";
+    debuguear($aut);
 }
 
 

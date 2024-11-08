@@ -10,6 +10,7 @@ protected static $columnasDB = [];
 protected static $tabla = '';
 protected static $where = '';
 protected static $tablas = '';
+protected static $ids = '';
 
 //Errores
 
@@ -132,13 +133,19 @@ public function eliminar(){
     $tablas = static::$tabla;
 
     if($tablas =='vendedores'){
-        $query = " DELETE FROM ". static::$tabla  ." WHERE idVendedores = " . self::$db->escape_string($this->idVendedores)." LIMIT 1";
+        // $query = " DELETE FROM ". static::$tabla  ." WHERE idVendedores = " . self::$db->escape_string($this->idVendedores)." LIMIT 1";
+        $ids = self::$db->escape_string($this->idVendedores);
+        $where = " WHERE idVendedores = ";
     }
     
     else if($tablas == 'propiedades'){
-        $query = " DELETE FROM ". static::$tabla  ." WHERE id = " . self::$db->escape_string($this->id)." LIMIT 1";
+        // $query = " DELETE FROM ". static::$tabla  ." WHERE id = " . self::$db->escape_string($this->id)." LIMIT 1";
+        $ids = self::$db->escape_string($this->id);
+        $where = " WHERE id = ";
 
 }
+
+$query = " DELETE FROM ". static::$tabla  .$where . $ids." LIMIT 1";
 
 
 

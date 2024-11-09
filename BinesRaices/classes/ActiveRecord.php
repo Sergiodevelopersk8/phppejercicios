@@ -47,16 +47,22 @@ public static function setDB($database){
 public function Guardar(){
 
 
-
 if(!is_null($this->id) ){
-
-$this->actualizar();
-
+    
+    
+    $this->actualizar();
+    
+    
 }
-
+else if(!is_null($this->idVendedores)){
+    
+    
+    $this->actualizar();
+}
 else {
-
-
+    
+    
+    
 $this->crear();
 
 }
@@ -94,6 +100,8 @@ return $resultado;
 
 public function actualizar(){
 
+$tablas = static::$tabla;
+
 $atributos = $this->sanitizarAtributos();
 
 $valores = [];
@@ -104,10 +112,23 @@ $valores[] = "{$key}='{$valor}'";
 
 }
 
+
+if($tablas == 'vendedores'){
+    $where = " WHERE idVendedores='";
+    $ids = self::$db->escape_string($this->idVendedores);
+}
+
+else if($tablas == 'propiedades'){
+    $where = " WHERE id='";
+    $ids = self::$db->escape_string($this->id);
+}
+
+
 $query = "UPDATE ". static::$tabla . "  SET ";
 $query .= join(', ', $valores);
-$query .= " WHERE id='".self::$db->escape_string($this->id)."' ";
+$query .= $where.$ids."' ";
 $query .= " LIMIT 1";
+
 
 $resultado = self::$db->query($query);
 
@@ -259,7 +280,7 @@ $tablas = static::$tabla;
     }
     
     else if($tablas == 'propiedades'){
-   $where = " WHERE id = ";
+   $where = " WHERE id =  ";
 
 }
 

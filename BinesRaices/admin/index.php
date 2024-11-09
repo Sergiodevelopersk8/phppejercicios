@@ -71,17 +71,17 @@ incluirTemplate('header');
         <?php
         if( intval($codigo) === 1){?>
     
-    <div class="alerta exito">Anuncio creado Correctamente</div>
+    <div class="alerta exito">Creado Correctamente</div>
     
     <?php }
     else if( intval($codigo) === 2){ ?>
 
     
-    <div class="alerta exito">Anuncio Actualizado Correctamente</div>
+    <div class="alerta exito">Actualizado Correctamente</div>
     
     <?php }
     else if(intval($codigo) === 3){?>
-    <div class="alerta exito">Anuncio Eliminado Correctamente</div>
+    <div class="alerta exito">Eliminado Correctamente</div>
     <?php }?>
 
         <a href ="/udemyphpcurso/BinesRaices/admin/propiedades/crear.php" class ="boton boton-verde">Nueva propiedad</a>
@@ -153,7 +153,7 @@ incluirTemplate('header');
                     <input type="hidden" name="tipo" value="vendedor">
                     <input type="submit" class="boton-rojo-block-eliminar" value="Eliminar"  >
                 </form>
-                <a href="/udemyphpcurso/BinesRaices/admin/vendedores/actualizar.php?id=<?php echo $vendedores[$i]->idVendedores; ?>" class="boton-amarillo-block">Actualizar</a>
+                <a href="/udemyphpcurso/BinesRaices/admin/vendedores/actualizar.php?idVendedores=<?php echo $vendedores[$i]->idVendedores; ?>" class="boton-amarillo-block">Actualizar</a>
             </td>
         </tr>
         <?php } ?>

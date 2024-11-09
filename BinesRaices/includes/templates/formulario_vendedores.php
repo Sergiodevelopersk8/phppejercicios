@@ -3,6 +3,7 @@
 
                 <label for="nombre">Nombre: </label>
                 <input type="text"  id="nombre" name="vendedor[nombre]" placeholder="Nombre Vendedor(a)"  value =  "<?php echo sant($vendedor->nombre); ?>" >
+                <input type="text"  id="id" name="vendedor[idVendedores]" placeholder="Nombre Vendedor(a)"  value =  "<?php echo sant($vendedor->idVendedores); ?>" >
                 
                 <label for="apellido">Apellido: </label>
                 <input type="text"  id="apellido" name="vendedor[apellido]" placeholder="Apellido Vendedor(a)"  value =  "<?php echo sant($vendedor->apellido); ?>" >

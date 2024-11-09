@@ -13,6 +13,15 @@ $errores = Vendedor::getErrores();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
+    $vendedor = new Vendedor($_POST['vendedor']);
+
+//validar campos vacios 
+
+$errores = $vendedor->validar();
+
+if(empty($errores)){
+    $vendedor->guardar();
+}
 
 
 }

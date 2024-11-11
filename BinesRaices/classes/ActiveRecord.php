@@ -49,7 +49,7 @@ public function Guardar(){
 
 if(!is_null($this->id) ){
     
-    
+   
     $this->actualizar();
     
     
@@ -57,10 +57,12 @@ if(!is_null($this->id) ){
 else if(!is_null($this->idVendedores)){
     
     
+   
     $this->actualizar();
 }
-else {
+else if (is_null($this->idVendedores) || is_null($this->id) ){
     
+   
     
     
 $this->crear();

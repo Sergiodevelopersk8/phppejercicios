@@ -48,7 +48,7 @@ for($i=0; $i<count($errores);$i++){?>
 ?>
 
         <form class="formulario" method="POST"  action="/udemyphpcurso/BinesRaices/admin/vendedores/crear.php">
-            <?php include '../../includes/templates/formulario_vendedores.php';?>
+            <?php include '../../includes/templates/formulario_vendedores_crear.php';?>
 <input type="submit" value="Registrar Vendedor(a)" class="boton boton-verde">
         </form>
     </main>

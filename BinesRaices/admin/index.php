@@ -68,21 +68,15 @@ incluirTemplate('header');
 
     <main class="contenedor seccion">
         <h1>Administrado de bienes raices</h1>
-        <?php
-        if( intval($codigo) === 1){?>
-    
-    <div class="alerta exito">Creado Correctamente</div>
-    
-    <?php }
-    else if( intval($codigo) === 2){ ?>
+       <?php
+       $mensaje = mostrarNotificacion(intval($codigo));
+       if($mensaje){?>
+<p class="exito"><?php echo sant($mensaje);?></p>
+<?php
+}
 
-    
-    <div class="alerta exito">Actualizado Correctamente</div>
-    
-    <?php }
-    else if(intval($codigo) === 3){?>
-    <div class="alerta exito">Eliminado Correctamente</div>
-    <?php }?>
+?>
+
 
         <a href ="/udemyphpcurso/BinesRaices/admin/propiedades/crear.php" class ="boton boton-verde">Nueva propiedad</a>
         <a href ="/udemyphpcurso/BinesRaices/admin/vendedores/crear.php" class ="boton boton-amarillo">Nuevo(a) Vendedor</a>

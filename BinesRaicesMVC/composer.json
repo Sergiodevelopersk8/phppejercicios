@@ -1,0 +1,21 @@
+{
+    "name": "draw/bines-raices",
+    "description": "Creando un poryecto con poo",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Model\\": "./models",
+            "MVC\\":"./",
+            "Controllers\\":"./controllers"
+        }
+    },
+    "authors": [
+        {
+            "name": "SergioMerinoCortez",
+            "email": "utp0001553@alumno.utpuebla.edu.mx"
+        }
+    ],
+    "require": {
+        "intervention/image": "^3.8"
+    }
+}

@@ -1,0 +1,14 @@
+http://localhost/BinesRaicesMVC/public/index.php/admin
+http://localhost/phpmyadmin/index.php?route=/sql&pos=0&db=bienesraices_db&table=propiedades
+
+correo@correo.com
+123456
+
+
+ALTER TABLE `bienesraices_crud`.`propiedades` 
+CHANGE COLUMN `estacionamient` `estacionamiento` INT NULL DEFAULT NULL ;
+Sergio Merino adquirio una casa en polanco para vivir junto a sus dos esposas Kiernan Shipka y Abigail Donelli 
+
+gulp
+
+$ gulp

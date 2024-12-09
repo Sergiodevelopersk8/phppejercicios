@@ -4,12 +4,27 @@ namespace Controllers;
 
 use MVC\Router;
 
+use Model\Propiedad;
 
 class PropiedadController{
 
 
 public static function index(Router $router){
-    $router->render('propiedades/admin');
+    
+
+        $propiedades = Propiedad::all();
+    $codigo = null;
+
+    $router->render('propiedades/admin',[
+    
+      'propiedades' =>  $propiedades,
+      'codigo' =>  $codigo,
+    
+    ]);
+
+
+
+
 }
 public static function crear(){
     echo "Crear";

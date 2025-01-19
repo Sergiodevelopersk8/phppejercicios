@@ -11,7 +11,9 @@ $router = new Router();
 
 
 $router->get('/admin',[PropiedadController::class,'index']);
-$router->get('/propiedades/crear',[PropiedadController::class,'crear']);
+
+$router->get('/BinesRaicesMVC/views/propiedades/crear',[PropiedadController::class,'crear']);
+
 $router->get('/propiedades/actualizar',[PropiedadController::class,'actualizar']);
 
 

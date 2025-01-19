@@ -26,8 +26,13 @@ public static function index(Router $router){
 
 
 }
-public static function crear(){
-    echo "Crear";
+public static function crear(Router $router){
+    
+    $router->render('propiedades/crear', [
+
+
+
+    ]);
 }
 
 

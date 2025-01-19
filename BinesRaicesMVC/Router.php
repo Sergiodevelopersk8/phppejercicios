@@ -52,12 +52,12 @@ class Router{
 
 
 
-        ob_start();
-        include __DIR__ . "/views/$view.php";
+        ob_start(); //almacenamiento en memoria durante un momento
+        include_once __DIR__ . "/views/$view.php";
         
         $contenido = ob_get_clean(); //LIMPIAR EL BUFFER
 
-        include __DIR__ ."/views/layout.php";
+        include_once __DIR__ . '/views/layout.php';
     
     
     

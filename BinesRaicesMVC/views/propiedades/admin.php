@@ -12,7 +12,8 @@
  
 
 
-        <a href ="/udemyphpcurso/BinesRaices/admin/propiedades/crear.php" class ="boton boton-verde">Nueva propiedad</a>
+        <!-- <a href ="/views/propiedades/crear" class ="boton boton-verde">Nueva propiedad</a> -->
+        <a href ="/BinesRaicesMVC/views/propiedades/crear.php" class ="boton boton-verde">Nueva propiedad</a>
         <a href ="/udemyphpcurso/BinesRaices/admin/vendedores/crear.php" class ="boton boton-amarillo">Nuevo(a) Vendedor</a>
    
     <h2>Propiedades</h2>

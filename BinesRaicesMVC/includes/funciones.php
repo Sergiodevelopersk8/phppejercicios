@@ -5,7 +5,8 @@
 /*EL _DIR_ PERMITE INCLUIR LAS UBICACIONES PARA APACHE */
 define('TEMPLATES_URL',__DIR__.'/templates');
 define('FUNCIONES_URL',__DIR__.'funciones.php');
-DEFINE('CARPETAS_IMAGENES', __DIR__. '/../imagenes/');
+DEFINE('CARPETAS_IMAGENES', $_SERVER['DOCUMENT_ROOT'] . '/imagenes/');
+
 function incluirTemplate(string $nombre, bool $inicio = false){
 
     include TEMPLATES_URL ."/$nombre.php";
@@ -20,7 +21,8 @@ function estaAutenticado(){
     
     if(!$_SESSION['login'])
     {
-        header('http://localhost/udemyphpcurso/BinesRaices/login.php');
+        // header('http://localhost/udemyphpcurso/BinesRaices/login.php');
+        header('Location: /');
     }
     
      
@@ -51,14 +53,7 @@ function validarTipoContenido($tipo){
     $tipos = ['vendedor','propiedad'];
     return in_array($tipo, $tipos);
 /* 
-for($i = 0; $i< count($tipos); $i++){
-     if($tipo == $tipos[$i]){
-         return $tipo;
-     }
-     else{
-         return false;
-     }
- }
+for($i = 0; $i< count($tipos); $i++){ if($tipo == $tipos[$i]){ return $tipo;} else{ return false; } }
      */
  
      

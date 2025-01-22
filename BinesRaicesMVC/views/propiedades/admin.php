@@ -2,19 +2,22 @@
         <h1>Administrado de bienes raices</h1>
        <?php
       
+      
        if($codigo){
         $mensaje = mostrarNotificacion(intval($codigo));
         if($mensaje){?>
- <p class="exito"><?php echo sant($mensaje);?> </p>
- <?php } } ?>
+
+    <p class="exito"><?php echo sant($mensaje);?> </p>
+ 
+    <?php } } ?>
 
        
  
 
 
-        <!-- <a href ="/views/propiedades/crear" class ="boton boton-verde">Nueva propiedad</a> -->
-        <a href ="/BinesRaicesMVC/views/propiedades/crear.php" class ="boton boton-verde">Nueva propiedad</a>
-        <a href ="/udemyphpcurso/BinesRaices/admin/vendedores/crear.php" class ="boton boton-amarillo">Nuevo(a) Vendedor</a>
+        
+        <a href ="/propiedades/crear" class ="boton boton-verde">Nueva propiedad</a>
+        <a href ="/vendedores/crear" class ="boton boton-amarillo">Nuevo(a) Vendedor</a>
    
     <h2>Propiedades</h2>
    

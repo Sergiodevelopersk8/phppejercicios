@@ -12,3 +12,5 @@ Sergio Merino adquirio una casa en polanco para vivir junto a sus dos esposas Ki
 gulp
 
 $ gulp
+
+php -S localhost:3000

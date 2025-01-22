@@ -12,7 +12,11 @@ class Router{
 
         $this->rutasGet[$url] = $fn;
 
+    }
 
+    public function post($url, $fn){
+
+        $this->rutasPost[$url] = $fn;
 
     }
 
@@ -28,7 +32,15 @@ class Router{
             $fn = $this->rutasGet[$urlActual] ?? null;
             
         }
+        else{
+
+            $fn = $this->rutasPost[$urlActual] ?? null;
+
+        }
         
+
+
+
 
         if($fn){
 
@@ -45,14 +57,12 @@ class Router{
     public function render($view, $datos = []){
 
 
+        ob_start(); //almacenamiento en memoria durante un momento
+
         foreach($datos as $key => $value){
-            $$key = $value;
+            $$key = $value; //$$key quiere decir variable de variable noi pierde el valor
         }
 
-
-
-
-        ob_start(); //almacenamiento en memoria durante un momento
         include_once __DIR__ . "/views/$view.php";
         
         $contenido = ob_get_clean(); //LIMPIAR EL BUFFER

@@ -1,0 +1,4 @@
+// $router->get('/BinesRaicesMVC/views/propiedades/crear',[PropiedadController::class,'crear']);
+<!-- <a href ="/views/propiedades/crear" class ="boton boton-verde">Nueva propiedad</a> -->
+<!-- <a href ="/BinesRaicesMVC/views/propiedades/crear.php" class ="boton boton-verde">Nueva propiedad</a> -->
+        // DEFINE('CARPETAS_IMAGENES', __DIR__. '/../imagenes/');

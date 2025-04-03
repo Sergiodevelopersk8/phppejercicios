@@ -13,8 +13,8 @@
                 <input type="file"  id="imagen"  accept="image/jpeg, image/png" name="propiedad[image]" >
                 <?php if($propiedad->imagen){?>
 
-
-<img src="../../imagenes/<?php echo $propiedad->imagen ?>" class="img-samll">
+                    <!-- ../../imagenes/ -->
+<img src="../../public/imagenes/<?php echo $propiedad->imagen ?>" class="img-samll">
 
                 <?php }?>
 

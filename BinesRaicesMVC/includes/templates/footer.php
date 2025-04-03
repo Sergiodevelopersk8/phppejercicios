@@ -11,6 +11,6 @@
         <p class="copyright">Todos los derechos Reservados <?php echo $fecha = date('Y');?> &copy;</p>
     </footer>
 
-    <script src="/udemyphpcurso/BinesRaices/build/js/bundle.min.js"></script>
+    <script src="../../public/build/js/bundle.min.js"></script>
 </body>
 </html>

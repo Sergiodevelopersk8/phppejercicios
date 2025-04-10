@@ -5,8 +5,8 @@
     "autoload": {
         "psr-4": {
             "Model\\": "./models",
-            "MVC\\":"./",
-            "Controllers\\":"./controllers"
+            "MVC\\" : "./",
+            "Controllers\\" : "./controllers"
         }
     },
     "authors": [

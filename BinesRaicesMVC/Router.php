@@ -2,82 +2,73 @@
 
 namespace MVC;
 
+
 class Router{
+    
+    public $rutasGET = [];
+    public $rutasPOST = [];
+    
+    public function get($url, $funcion){
 
+        $this->rutasGET[$url] = $funcion;
 
-    public $rutasGet = [];
-    public $rutasPost = [];
+    }
+    public function post($url, $funcion){
 
-    public function get($url, $fn){
-
-        $this->rutasGet[$url] = $fn;
+        $this->rutasPOST[$url] = $funcion;
 
     }
 
-    public function post($url, $fn){
-
-        $this->rutasPost[$url] = $fn;
-
-    }
 
 
+    public function comprobarRutas()
+    {
+       
+     $urlActual = $_SERVER['PATH_INFO'] ?? '/';
+     $metodo = $_SERVER['REQUEST_METHOD'];
+     
+     if($metodo === 'GET' ){
 
-
-    public function comprobarRutas(){
-
-        $urlActual = $_SERVER['PATH_INFO'] ?? '/';
-        $metodo = $_SERVER['REQUEST_METHOD'];
-
-        if($metodo === 'GET'){
-            $fn = $this->rutasGet[$urlActual] ?? null;
-            
-        }
-        else{
-
-            $fn = $this->rutasPost[$urlActual] ?? null;
-
+         $funcion = $this->rutasGET[$urlActual] ?? null;
+         
         }
         
-
-
-
-
-        if($fn){
-
-        call_user_func($fn,$this);
-
-        }
         else{
-            echo 'pagina no encontrada';
-        }
+            
+            $funcion = $this->rutasPOST[$urlActual] ?? null;
+       }
+
+
+
+       //si la url si existe
+       if($funcion){
+        //se llama a la funcion aunque no se sabe como se llama
+        call_user_func($funcion, $this);
+       }
+       else{
+        echo 'página no encontrada';
+       }
 
     }
 
+    //muestra una vista
 
     public function render($view, $datos = []){
 
+foreach ($datos as $key => $value) {
+    //significa variable de variable
+    $$key = $value;
+}
 
-        ob_start(); //almacenamiento en memoria durante un momento
+        //inicia el servidor en memoria
+        ob_start();
+        include __DIR__ . "/views/$view.php";
+        //limpia 
+        $contenido = ob_get_clean();
 
-        foreach($datos as $key => $value){
-            $$key = $value; //$$key quiere decir variable de variable noi pierde el valor
-        }
+        include __DIR__ ."/views/layout.php";
 
-        include_once __DIR__ . "/views/$view.php";
-        
-        $contenido = ob_get_clean(); //LIMPIAR EL BUFFER
-
-        include_once __DIR__ . '/views/layout.php';
-    
-    
-    
-    
     }
-
-
-
-
-
 
 
 }

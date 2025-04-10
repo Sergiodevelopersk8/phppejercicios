@@ -1,4 +1,5 @@
-procedo al video 394
-entra en la carpeta de public y ejecutar en la terminal el siguiente comando php -S localhost::3000
 
-paso al video 402
+entra en la carpeta de public y ejecutar en la terminal 
+el siguiente comando php -S localhost:3000
+
+paso al video 407

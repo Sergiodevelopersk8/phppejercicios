@@ -84,9 +84,93 @@ class PropiedadController{
 
 
     public static function actualizar(Router $router){
+        $errores = Propiedad::getErrores();
+        $vendedores = Vendedor::all();
+        $id = validarORedireccionar('/admin');
         
-        $router->render('propiedades/actualizar');
+        $propiedad = Propiedad::find($id);
+        
+        //ejecutar el código después de que el usuario envia el  formulario 
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+   
+        //asignar atributos
+    
+        $args = $_POST['propiedad'];
+      
+      
+        $propiedad->sincronizar($args);
+    
+            // validar
+    
+        $errores = $propiedad->validar();
+    
+    
+            //generar un nombre unico
+            $nombreImagen = md5(uniqid(rand(), true)).".jpg";
+    
+            //realiza resize
+            if($_FILES['propiedad']['tmp_name']['image']){
+    
+            $manager = new Image(Driver::class);
+            $image = $manager->read($_FILES['propiedad']['tmp_name']['image'])->cover(800,600);
+            $propiedad->setImagen($nombreImagen);
+            }
+    
+    
+    
+        if(empty($errores)){
+            if($_FILES['propiedad']['tmp_name']['image']){
+    
+                //almacenar la imagen
+                $image->save(CARPETAS_IMAGENES.$nombreImagen);
+            }
+      
+            $propiedad->guardar();
+      
+    
+    
+        }
+    
+    
+    
+    
+    
+        }
+
+
+
+        $router -> render('/propiedades/actualizar',[
+            'propiedad'=> $propiedad,
+            'vendedores' => $vendedores,
+
+            'errores' => $errores
+        ]);
+
     }
 
 
-}
+    public static function eliminar( ){
+        
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            
+            $id = $_POST['id'];
+            $id = filter_var($id, FILTER_VALIDATE_INT);
+
+            if($id){
+                $tipo = $_POST['tipo'];
+                if(validarTipoContenido($tipo)){
+                    $propiedad = Propiedad::find($id);
+                    $propiedad->eliminar();
+                }
+            }
+
+
+
+        }
+       
+
+
+    }
+
+
+} //fin de la clase

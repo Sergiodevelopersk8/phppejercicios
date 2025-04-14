@@ -14,11 +14,16 @@ class PropiedadController{
 
     public static function index(Router $router){
         $propiedades = Propiedad::all();
+
+        $vendedores = Vendedor::all();
+
+
         $codigo = $_GET['codigo'] ?? null;
            
         $router->render('propiedades/admin',[
         'propiedades'=> $propiedades,
-        'codigo'=> $codigo    
+        'codigo'=> $codigo,
+        'vendedores' => $vendedores    
         ]);
         
     }

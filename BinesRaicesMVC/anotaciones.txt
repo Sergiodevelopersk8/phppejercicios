@@ -2,4 +2,4 @@
 entra en la carpeta de public y ejecutar en la terminal 
 el siguiente comando php -S localhost:3000
 
-paso al video 407
+paso al video 411

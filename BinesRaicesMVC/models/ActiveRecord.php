@@ -62,7 +62,7 @@ else if(!is_null($this->idVendedores) && !is_null($this->id) ){
 }
 else if (is_null($this->idVendedores) || is_null($this->id) ){
     
-    // debuguear("estoy en else if del id y id vendedores");
+    //debuguear("estoy en else if del id y id vendedores");
     
     
 $this->crear();
@@ -85,6 +85,8 @@ $query .= join(', ', array_keys($atributos));
 $query .= " ) VALUES (' "; 
 $query .= join("', '", array_values($atributos));
 $query .=  " ')";
+
+
 
 $resultado = self::$db->query($query);
 
@@ -186,9 +188,10 @@ if($resultado){
 public function Atributos(){
 $atributos = [];
 foreach(static::$columnasDB as $columna){
-    if($columna === 'id') continue;
+    if($columna === 'id' || $columna === 'idVendedores') continue;
 $atributos[$columna] = $this->$columna;
 }
+// debuguear($atributos);
 return $atributos;
 }
 

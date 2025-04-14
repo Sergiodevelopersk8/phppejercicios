@@ -39,8 +39,8 @@ exit;
 
     //escapa el html
     function sant($html){
-$s = htmlspecialchars($html);
-return $s;
+    $s = htmlspecialchars($html);
+    return $s;
     }
 
 

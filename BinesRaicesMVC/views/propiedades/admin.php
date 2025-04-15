@@ -77,12 +77,12 @@
             
           
             <td>
-                <form method="POST" class="w-100">
+                <form method="POST" class="w-100" action="/vendedor/eliminar">
                     <input type="hidden" name="id" value="<?php echo $vendedores[$i]->idVendedores; ?>">
                     <input type="hidden" name="tipo" value="vendedor">
                     <input type="submit" class="boton-rojo-block-eliminar" value="Eliminar"  >
                 </form>
-                <a href="/udemyphpcurso/BinesRaices/admin/vendedores/actualizar.php?idVendedores=<?php echo $vendedores[$i]->idVendedores; ?>" class="boton-amarillo-block">Actualizar</a>
+                <a href="/vendedor/actualizar?idVendedores=<?php echo $vendedores[$i]->idVendedores; ?>" class="boton-amarillo-block">Actualizar</a>
             </td>
         </tr>
         <?php } ?>

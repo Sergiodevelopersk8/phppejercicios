@@ -6,13 +6,10 @@
 define('TEMPLATES_URL',__DIR__.'/templates');
 define('FUNCIONES_URL',__DIR__.'funciones.php');
 DEFINE('CARPETAS_IMAGENES', $_SERVER['DOCUMENT_ROOT'] . '/imagenes/');
-function incluirTemplate(string $nombre, bool $inicio = false){
 
+function incluirTemplate(string $nombre, bool $inicio = false){
     include TEMPLATES_URL ."/$nombre.php";
 }
-
-
-
 
 
 function estaAutenticado(){
@@ -30,10 +27,10 @@ function estaAutenticado(){
     function debuguear($variable){
         echo '<pre>';
 
-var_dump($variable);
-echo '</pre>';
+    var_dump($variable);
+    echo '</pre>';
 
-exit;
+    exit;
     }
 
 
@@ -46,20 +43,11 @@ exit;
 
     //validar tipo de contenido
 
-function validarTipoContenido($tipo){
+    function validarTipoContenido($tipo){
 
     $tipos = ['vendedor','propiedad'];
     return in_array($tipo, $tipos);
-/* 
-for($i = 0; $i< count($tipos); $i++){
-     if($tipo == $tipos[$i]){
-         return $tipo;
-     }
-     else{
-         return false;
-     }
- }
-     */
+/* for($i = 0; $i< count($tipos); $i++){ if($tipo == $tipos[$i]){ return $tipo; } else{return false; } } */
  
      
 
@@ -96,15 +84,50 @@ return $mensaje;
 }
 
 
-function validarORedireccionar(string $url){
+function validarORedireccionarPropiedad(string $url){
     
     //valida la url por id    
     $id = $_GET['id'];
     $id = filter_var($id, FILTER_VALIDATE_INT);
 
-    if(!$id){
-    header("Location: $url");
 
+    if(!$id){
+
+        
+    
+        header("Location: $url");
     }
-    return $id;
+
+   
+        
+        return $id;
+    
+
+     
+
+}
+
+
+function validarORedireccionarvendedor(string $url){
+    
+      
+   
+
+    $idvendedor = $_GET['idVendedores'];
+    $idvendedor = filter_var($idvendedor, FILTER_VALIDATE_INT);
+
+    if(!$idvendedor){
+
+        debuguear($idvendedor);
+        
+    
+        header("Location: $url");
+    }
+
+   
+
+       
+        return $idvendedor;
+       
+
 }

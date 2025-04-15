@@ -50,21 +50,28 @@ public function Guardar(){
    
 
 if(!is_null($this->id) ){
-//    debuguear("estoy en if del id"); 
-    $this->actualizar();
-    
-    
+ debuguear("estoy en if del id"); 
+ $this->actualizar();
+ 
+ 
 }
+
 else if(!is_null($this->idVendedores) && !is_null($this->id) ){
     
-    
+    //debuguear("estoy en if del idvendedores y el id"); 
     $this->actualizar();
+    
 }
+
+else if(!is_null($this->idVendedores)){
+    $this->actualizar();
+
+}
+
 else if (is_null($this->idVendedores) || is_null($this->id) ){
     
-    //debuguear("estoy en else if del id y id vendedores");
-    
-    
+    //debuguear("estoy en else if del id y id vendedores crear");
+        
 $this->crear();
 
 }
@@ -311,6 +318,7 @@ $resultado = self::consultarSQL($query);
 return array_shift($resultado);
 
 }
+
 /*
 public static function find($id){
 

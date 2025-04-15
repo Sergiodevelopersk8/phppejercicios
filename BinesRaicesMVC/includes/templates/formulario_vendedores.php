@@ -2,14 +2,18 @@
                 <legend>Información General</legend>
 
                 <label for="nombre">Nombre: </label>
-                <input type="text"  id="nombre" name="vendedor[nombre]" placeholder="Nombre Vendedor(a)"  value =  "<?php echo sant($vendedor->nombre); ?>" >
-                <input type="hidden" name="vendedor[idVendedores]"  value =  "<?php echo sant($vendedor->idVendedores); ?>" >
+                <input type="text"  id="nombre" name="vendedor[nombre]" 
+                placeholder="Nombre Vendedor(a)"  value =  "<?php echo sant($vendedor->nombre); ?>" >
+                <input type="hidden" name="vendedor[idVendedores]"  
+                value =  "<?php echo sant($vendedor->idVendedores); ?>" >
                 
                 <label for="apellido">Apellido: </label>
-                <input type="text"  id="apellido" name="vendedor[apellido]" placeholder="Apellido Vendedor(a)"  value =  "<?php echo sant($vendedor->apellido); ?>" >
+                <input type="text"  id="apellido" name="vendedor[apellido]" 
+                placeholder="Apellido Vendedor(a)"  value =  "<?php echo sant($vendedor->apellido); ?>" >
                 
                 <label for="telefono">Telefono: </label>
-                <input type="text"  id="telefono" name="vendedor[telefono]" placeholder="Telefono Vendedor(a)"  value =  "<?php echo sant($vendedor->telefono); ?>" >
+                <input type="text"  id="telefono" name="vendedor[telefono]" 
+                placeholder="Telefono Vendedor(a)"  value =  "<?php echo sant($vendedor->telefono); ?>" >
 
 
 

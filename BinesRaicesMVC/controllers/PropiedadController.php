@@ -91,7 +91,7 @@ class PropiedadController{
     public static function actualizar(Router $router){
         $errores = Propiedad::getErrores();
         $vendedores = Vendedor::all();
-        $id = validarORedireccionar('/admin');
+        $id = validarORedireccionarPropiedad('/admin');
         
         $propiedad = Propiedad::find($id);
         

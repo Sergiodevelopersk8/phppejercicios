@@ -55,10 +55,10 @@ class Router{
 
     public function render($view, $datos = []){
 
-foreach ($datos as $key => $value) {
-    //significa variable de variable
-    $$key = $value;
-}
+        foreach ($datos as $key => $value) {
+        //significa variable de variable
+        $$key = $value;
+        }
 
         //inicia el servidor en memoria
         ob_start();
